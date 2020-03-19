@@ -1,6 +1,12 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <cstdlib>
+
+extern "C"
+{
+    #include "zlib.h"
+}
+
 using namespace std;
 using namespace cv;
 const int ROW=1000;
@@ -29,6 +35,31 @@ void video_produce(int piccnt);
 int srcpoint_produce();
 void src_produce();
 void read_file();
+
+/*--------------------------------------*/
+//压缩模块
+void zip(char *PreZipBits,unsigned char *ZippedBits)
+{
+    z_stream stream;
+    
+    
+    stream.next_in = (Bytef *)PreZipBits;
+    stream.avail_in = (uInt)strlen(PreZipBits);
+    
+    stream.next_out = (Bytef *)ZippedBits;
+    stream.avail_out = (uInt)1024;
+    
+    stream.zalloc = (alloc_func)0;
+    stream.zfree = (free_func)0;
+    stream.opaque = (voidpf)0;
+    
+    deflateInit(&stream, Z_DEFAULT_COMPRESSION);
+    deflate(&stream,Z_FINISH);
+    deflateEnd(&stream);
+      
+}
+
+
 int main() {
 //    int cnt=image_produce();
 //    video_produce(cnt);
