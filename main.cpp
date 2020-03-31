@@ -2,8 +2,8 @@
 #include <opencv2/opencv.hpp>
 #include <cstdlib>
 
-#define Buffer_Size_By_Byte 1024*1024*10
-#define Buffer_Size_By_Bit 1024*1024*10*8
+#define Buffer_Size_By_Byte 1024*1024*100
+#define Buffer_Size_By_Bit 1024*1024*100*8
 #define Data_Block_Size_By_Bit 256      //改变这个可以调节数据块大小。具体多大最合适和错误率挂钩，我没算。暂时不要改动。否则会出错。
 
 using namespace std;
@@ -113,9 +113,9 @@ void video_produce(int piccnt)
         Mat src=imread(file_name,IMREAD_COLOR);
         //printf("%d %d===\n",Vwriter.)
         //printf("%d %d\n",src.rows,src.cols);
-        namedWindow("src");
-        imshow("src",src);
-        waitKey(0);
+//        namedWindow("src");
+//        imshow("src",src);
+//        waitKey(0);
 
         for(int j=1;j<=perPicFps;j++)
         {
